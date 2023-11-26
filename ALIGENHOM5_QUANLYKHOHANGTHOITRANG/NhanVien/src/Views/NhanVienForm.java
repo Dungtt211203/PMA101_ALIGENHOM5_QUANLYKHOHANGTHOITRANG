@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author NamNguyenTien
  */
 public class NhanVienForm extends javax.swing.JFrame {
-
+    
     private NhanVienServiceImpl Service;
     private DefaultTableModel defaultTableModel;
     private String idwhenclick;
@@ -36,17 +36,17 @@ public class NhanVienForm extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         LoadTable();
     }
-
+    
     public void LoadTable() {
         defaultTableModel = (DefaultTableModel) tbNV.getModel();
         defaultTableModel.setRowCount(0);
         for (NhanVienViewModel x : Service.GetAll()) {
             defaultTableModel.addRow(new Object[]{
-                x.getId(), x.getManv(), x.getTennv(), x.getTendemNV(), x.getHoNV(), x.getNgaySinh(), x.getGioiTinh(), x.getSdt(), x.getDiaChi(), TrangThai(x.getTrangThai())
+                x.getId(), x.getManv(), x.getTennv(), x.getTendemNV(), x.getHoNV(), x.getNgaySinh(), x.getGioiTinh(), x.getDiaChi(), x.getSdt(), TrangThai(x.getTrangThai())
             });
         }
     }
-
+    
     public String TrangThai(int tt) {
         if (tt == 0) {
             return "Đi làm";
@@ -56,7 +56,7 @@ public class NhanVienForm extends javax.swing.JFrame {
             return null;
         }
     }
-
+    
     private boolean checkMaTrung(String ma) {
         try {
             Connection conn = DBContext11.getConnection();
@@ -75,7 +75,7 @@ public class NhanVienForm extends javax.swing.JFrame {
         }
         return false;
     }
-
+    
     public NhanVien GetDataFromGui() {
         String id = this.lblID.getText();
         String ma = this.txtMa.getText().trim();
@@ -86,6 +86,7 @@ public class NhanVienForm extends javax.swing.JFrame {
         String diaChi = this.txtDiaChi.getText().trim();
         String sdt = this.txtSdt.getText().trim();
         int gioitinh;
+        
         if (rdNam.isSelected()) {
             gioitinh = 0;
         } else {
@@ -97,19 +98,16 @@ public class NhanVienForm extends javax.swing.JFrame {
         } else {
             trangThai = 1;
         }
-
+        
         if (ten.equals("") || tenDem.equals("") || ho.equals("") || diaChi.equals("") || sdt.equals("")) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
             return null;
         }
-
         if (ma.equals("")) {
             JOptionPane.showMessageDialog(this, "Mã không được để trống");
             return null;
-        } else if (checkMaTrung(ma)) {
-            JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
-            return null;
         }
+        
         if (ngaySinh.equals("")) {
             JOptionPane.showMessageDialog(this, "Ngày sinh không được để trống");
             return null;
@@ -120,9 +118,9 @@ public class NhanVienForm extends javax.swing.JFrame {
         }
         NhanVien nv = new NhanVien(id, ma, ten, tenDem, ho, ngaySinh, gioitinh, diaChi, sdt, trangThai);
         return nv;
-
+        
     }
-
+    
     boolean testdata() {
         if (txtMa.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã nhân viên không dược để trống");
@@ -403,39 +401,55 @@ public class NhanVienForm extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        String ma = this.txtMa.getText().trim();
         if (this.testdata()) {
-            JOptionPane.showMessageDialog(this, Service.Add(GetDataFromGui()));
-            LoadTable();
-            Clear();
+            if (checkMaTrung(ma)) {
+                JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
+                return;
+            } else {
+                NhanVien temp = GetDataFromGui();
+                temp.setId(idwhenclick);
+                int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm nhân viên này?", "Xác nhận thêm", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(this, Service.Add(temp));
+                    idwhenclick = "";
+                    LoadTable();
+                    Clear();
+                }
+            }
         }
 
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        
+        int selectedRow = tbNV.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng trong bảng để sửa");
+            return;
+        }
         if (this.testdata()) {
-            int selectedRow = tbNV.getSelectedRow();
-            if (selectedRow == -1) {
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng trong bảng để sửa");
-            } else {
-                NhanVien temp = GetDataFromGui();
-                temp.setId(idwhenclick);
+            NhanVien temp = GetDataFromGui();
+            temp.setId(idwhenclick);
+            int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa nhân viên này?", "Xác nhận sửa", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
                 JOptionPane.showMessageDialog(this, Service.Update(temp));
-                idwhenclick = " ";
+                idwhenclick = "";
                 LoadTable();
                 Clear();
             }
         }
-
+        
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         int selectedRow = tbNV.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng trong bảng để xóa");
+            return;
         } else {
             NhanVien temp = new NhanVien();
             temp.setId(idwhenclick);
-
             int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa nhân viên này?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
                 JOptionPane.showMessageDialog(this, Service.Delete(temp));
@@ -444,6 +458,7 @@ public class NhanVienForm extends javax.swing.JFrame {
                 Clear();
             }
         }
+
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tbNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNVMouseClicked
@@ -460,14 +475,14 @@ public class NhanVienForm extends javax.swing.JFrame {
         txtTenDem.setText(temp.getTendemNV());
         txtHo.setText(temp.getHoNV());
         txtNgaySinh.setText(temp.getNgaySinh());
-        txtSdt.setText(temp.getSdt());
         txtDiaChi.setText(temp.getDiaChi());
+        txtSdt.setText(temp.getSdt());
         if (temp.getGioiTinh() == 0) {
             rdNam.setSelected(true);
         } else {
             rdNu.setSelected(true);
         }
-
+        
         if (temp.getTrangThai() == 0) {
             rdDiLam.setSelected(true);
         } else {
@@ -489,21 +504,21 @@ public class NhanVienForm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(NhanVienForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(NhanVienForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(NhanVienForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NhanVienForm.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -517,8 +532,9 @@ public class NhanVienForm extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void Clear() {
+        lblID.setText("");
         txtDiaChi.setText("");
         txtTenDem.setText("");
         txtMa.setText("");

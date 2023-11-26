@@ -10,6 +10,7 @@ package DomainModel;
  * @author NamNguyenTien
  */
 public class NhanVien {
+
     private String id;
     private String ma;
     private String ten, tenDem, ho;
@@ -19,7 +20,7 @@ public class NhanVien {
     private String diaChi;
     private int trangThai;
 
-    public NhanVien(String id, String ma, String ten, String tenDem, String ho, String ngaySinh, int gioiTinh, String sdt, String diaChi, int trangThai) {
+    public NhanVien(String id, String ma, String ten, String tenDem, String ho, String ngaySinh, int gioiTinh, String diaChi, String sdt, int trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -91,7 +92,6 @@ public class NhanVien {
         this.gioiTinh = gioiTinh;
     }
 
-
     public String getSdt() {
         return sdt;
     }
@@ -116,15 +116,9 @@ public class NhanVien {
         this.trangThai = trangThai;
     }
 
-    
-    
-
     @Override
     public String toString() {
         return "NhanVien{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", tenDem=" + tenDem + ", ho=" + ho + ", ngaySinh=" + ngaySinh + ", gioiTinh=" + gioiTinh + ", sdt=" + sdt + ", diaChi=" + diaChi + ", trangThai=" + trangThai + '}';
     }
 
-    
-    
-    
 }
