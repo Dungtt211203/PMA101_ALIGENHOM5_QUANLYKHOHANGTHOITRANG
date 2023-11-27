@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util;
+package Util;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -13,9 +13,9 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Admin
+ * @author Phong
  */
-public class DBContext {
+public class DBContex2 {
     private static final String USERNAME = "sa";
     private static final String PASSWORD = "admin";
     private static final String SERVER = "localhost";
@@ -42,7 +42,7 @@ public class DBContext {
             CONNECT_STRING = connectStringBuilder.toString();
             System.out.println("Connect String có dạng: " + CONNECT_STRING);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBContex2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
