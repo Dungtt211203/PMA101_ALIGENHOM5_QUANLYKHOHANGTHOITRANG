@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Reponsitories;
+package repo;
 
 import DomainModel.NhanVien;
-import Util.DBContext11;
-import ViewModels.NhanVienViewModel;
+import util.DBContext11;
+import ViewModel.NhanVienViewModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

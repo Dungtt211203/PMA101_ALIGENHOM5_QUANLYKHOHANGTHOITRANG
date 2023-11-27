@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Views;
+package view;
 
 import DomainModel.ChatLieu;
-import Services.ChatLieuService;
-import Services.impl.ChatLieuServiceImpl;
-import Util.DBContex2;
-import ViewModels.ChatLieuViewModel;
+import ViewModel.ChatLieuViewModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import service.ChatLieuService;
+import serviceImpl.ChatLieuServiceImpl;
+import util.DBContext;
 
 /**
  *
@@ -64,7 +64,7 @@ public class FrmChatLieu extends javax.swing.JFrame {
     
     private boolean checkMaTrung(String ma) {
         try {
-            Connection conn = DBContex2.getConnection();
+            Connection conn = DBContext.getConnection();
             PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM chatlieu WHERE Ma = ?");
             ps.setString(1, ma);
             ResultSet rs = ps.executeQuery();

@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Views;
+package view;
 
 import DomainModel.Size;
-import Services.impl.SizeServiceImpl;
-import Util.DBContext;
-import ViewModels.SizeVM;
-import java.awt.Color;
+import ViewModel.SizeVM;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import serviceImpl.SizeServiceImpl;
+import util.DBContext;
 
 /**
  *

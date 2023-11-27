@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package service;
 
 import DomainModel.Size;
-import ViewModels.SizeVM;
+import ViewModel.SizeVM;
 import java.util.ArrayList;
 
 /**

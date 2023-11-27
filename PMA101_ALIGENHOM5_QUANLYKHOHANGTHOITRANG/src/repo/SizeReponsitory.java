@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Reponsitories;
+package repo;
 
 import DomainModel.Size;
-import ViewModels.SizeVM;
+import ViewModel.SizeVM;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +20,7 @@ public class SizeReponsitory {
         
     public void insert(Size s) {
         try {
-            Connection conn = Util.DBContext.getConnection();
+            Connection conn = util.DBContext.getConnection();
             String sql = "INSERT INTO Size" + "(Ma,Ten)" + "VALUES(?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, s.getMa());
@@ -35,7 +34,7 @@ public class SizeReponsitory {
 
     public void update(Size s, String id) {
         try {
-            Connection conn = Util.DBContext.getConnection();
+            Connection conn = util.DBContext.getConnection();
             String sql = "UPDATE Size SET " + "Ma=?,Ten=? WHERE Id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, s.getMa());
@@ -50,7 +49,7 @@ public class SizeReponsitory {
 
     public void delete(String id) {
         try {
-            Connection conn = Util.DBContext.getConnection();
+            Connection conn = util.DBContext.getConnection();
             String sql = "DELETE FROM Size WHERE id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, id);
@@ -64,7 +63,7 @@ public class SizeReponsitory {
     public ArrayList<SizeVM> all() {
         ArrayList<SizeVM> listSize = new ArrayList<>();
         try {
-            Connection conn = Util.DBContext.getConnection();
+            Connection conn = util.DBContext.getConnection();
             String sql = "SELECT * FROM Size";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.execute();

@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Reponsitories;
+package repo;
 
 
 import DomainModel.ChatLieu;
-import Util.DBContex2;
-import ViewModels.ChatLieuViewModel;
+import ViewModel.ChatLieuViewModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import util.DBContex2;
 
 
 /**

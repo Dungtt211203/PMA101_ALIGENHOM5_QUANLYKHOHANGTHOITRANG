@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services.impl;
+package serviceImpl;
 
 import DomainModel.Size;
-import Reponsitories.SizeReponsitory;
-import Services.SizeService;
-import ViewModels.SizeVM;
+import ViewModel.SizeVM;
 import java.util.ArrayList;
+import repo.SizeReponsitory;
+import service.SizeService;
 
 /**
  *
  * @author Admin
  */
-public class SizeServiceImpl implements SizeService{
-    
+public class SizeServiceImpl implements SizeService {
+
     private SizeReponsitory sRepo;
 
     public SizeServiceImpl() {

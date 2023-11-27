@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Views;
+package view;
 
 import DomainModel.NhanVien;
-import Reponsitories.NhanVienReponsitory;
-import Services.impl.NhanVienServiceImpl;
-import Util.DBContext11;
-import ViewModels.NhanVienViewModel;
+import ViewModel.NhanVienViewModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import repo.NhanVienReponsitory;
+import serviceImpl.NhanVienServiceImpl;
+import util.DBContext11;
 
 /**
  *
