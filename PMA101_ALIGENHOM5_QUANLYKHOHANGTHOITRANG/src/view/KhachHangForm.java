@@ -37,11 +37,10 @@ public class KhachHangForm extends javax.swing.JFrame {
     public String getGioiTinh(int gioiTinh) {
         if (gioiTinh == 1) {
             return "Nam";
-        } else if (gioiTinh == 2) {
-            return "Nữ";
         } else {
-            return null;
+            return "Nữ";
         }
+       
     }
 
     public String getTrangThai(int trangThai) {
@@ -84,6 +83,8 @@ public class KhachHangForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -186,15 +187,21 @@ public class KhachHangForm extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Trạng Thái:");
 
+        buttonGroup1.add(rdNam);
         rdNam.setForeground(new java.awt.Color(255, 255, 255));
+        rdNam.setSelected(true);
         rdNam.setText("Nam");
 
+        buttonGroup1.add(rdNu);
         rdNu.setForeground(new java.awt.Color(255, 255, 255));
         rdNu.setText("Nữ");
 
+        buttonGroup2.add(rdCu);
         rdCu.setForeground(new java.awt.Color(255, 255, 255));
+        rdCu.setSelected(true);
         rdCu.setText("Khách Hàng Cũ");
 
+        buttonGroup2.add(rdMoi);
         rdMoi.setForeground(new java.awt.Color(255, 255, 255));
         rdMoi.setText("Khách Hàng Mới");
 
@@ -353,7 +360,7 @@ public class KhachHangForm extends javax.swing.JFrame {
         if(rdNam.isSelected()){
             kh.setGioiTinh(1);
         }else if(rdNu.isSelected()){
-            kh.setGioiTinh(2);
+            kh.setGioiTinh(0);
         }
         
         if(rdCu.isSelected()){
@@ -503,6 +510,8 @@ public class KhachHangForm extends javax.swing.JFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
